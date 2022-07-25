@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
+using Random=UnityEngine.Random;
+
 namespace Mirror
 {
     public enum PlayerSpawnMethod { Random, RoundRobin }
@@ -14,6 +16,8 @@ namespace Mirror
     [DisallowMultipleComponent]
     [AddComponentMenu("Network/Network Manager")]
     [HelpURL("https://mirror-networking.gitbook.io/docs/components/network-manager")]
+
+    
     public class NetworkManager : MonoBehaviour
     {
         /// <summary>Enable to keep NetworkManager alive when changing scenes.</summary>
@@ -121,6 +125,15 @@ namespace Mirror
         //    in other words, we need this to know which mode we are running in
         //    during FinishLoadScene.
         public NetworkManagerMode mode { get; private set; }
+
+
+        [SerializeField]
+        private int pickUp1Count = 50;
+        [SerializeField]
+        private int pickUp2Count = 25;
+
+        GameObject pickUp1;
+        GameObject pickUp2;
 
         // virtual so that inheriting classes' OnValidate() can call base.OnValidate() too
         public virtual void OnValidate()
@@ -1267,6 +1280,25 @@ namespace Mirror
             // => appending the connectionId is WAY more useful for debugging!
             player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
             NetworkServer.AddPlayerForConnection(conn, player);
+
+            if (numPlayers == 2)
+            {
+                for(int i = 0; i < pickUp1Count; i++)
+                {
+                    var position = new Vector3(Random.Range(-15.0f, 15.0f), 0.5f, Random.Range(-15.0f, 15.0f));
+                    pickUp1 = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "PickUp"), position, Quaternion.identity);
+                    NetworkServer.Spawn(pickUp1);
+                }
+
+                for(int i = 0; i < pickUp2Count; i++)
+                {
+                    var position = new Vector3(Random.Range(-15.0f, 15.0f), 0.5f, Random.Range(-15.0f, 15.0f));
+                    pickUp1 = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "PickUp2"), position, Quaternion.identity);
+                    NetworkServer.Spawn(pickUp1);
+                }
+                
+            }
+            
         }
 
         /// <summary>Called on server when transport raises an exception. NetworkConnection may be null.</summary>

@@ -28,7 +28,7 @@ public class Player1Movement : NetworkBehaviour
     {
         //Debug.Log(isLocalPlayer);
         if(isLocalPlayer){
-            Debug.Log("LOCAL");
+            //Debug.Log("LOCAL");
             if(Input.GetKeyDown(KeyCode.W))
             {
                 Debug.Log("Bang W");
