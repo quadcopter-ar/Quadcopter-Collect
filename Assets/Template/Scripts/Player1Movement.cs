@@ -10,6 +10,8 @@ public class Player1Movement : NetworkBehaviour
     private Rigidbody rb;
     [SyncVar]
     private int playerScore;
+
+    //[SyncVar]
     public TextMeshProUGUI player1ScoreText;
     public TextMeshProUGUI gameOverText;
     GameObject[] players;
@@ -25,7 +27,7 @@ public class Player1Movement : NetworkBehaviour
             //gameOverText.gameObject.SetActive(false);
         }
 
-        players = GameObject.FindGameObjectsWithTag("Player");
+        //players = GameObject.FindGameObjectsWithTag("Player");
     }
 
     // Update is called once per frame
@@ -65,6 +67,7 @@ public class Player1Movement : NetworkBehaviour
                 rb.AddForce(movementVector);
                 //transform.position = transform.position + movementVector;
             }
+            SetScoreText();
         }
 
 
@@ -78,27 +81,39 @@ public class Player1Movement : NetworkBehaviour
         return playerScore;
     }
 
+    [Command]
+    public void SetPlayerScore(int newScore)
+    {
+        playerScore = newScore;
+    }
+
+    //[Command]
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("PickUp"))
         {
             other.gameObject.SetActive(false);
-            playerScore = playerScore + 2;
+            //this.gameObject.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
+            SetPlayerScore(playerScore + 2);
+            //playerScore = playerScore + 2;
+            Debug.Log("SCORE! " + playerScore);
             //SetCountText();
-            SetScoreText();
+            SetScoreText(); 
         }
 
         if(other.gameObject.CompareTag("PickUp2"))
         {
             other.gameObject.SetActive(false);
-            playerScore = playerScore + 3;
+            //this.gameObject.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
+            SetPlayerScore(playerScore + 3);
+            //playerScore = playerScore + 3;
             //SetCountText();
             SetScoreText();
         }
         
     }
 
-
+    
     public void SetScoreText()
     {
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -109,8 +124,8 @@ public class Player1Movement : NetworkBehaviour
             scoreText+=(i+1);
             scoreText+=": ";
 
-            int playerScore = players[i].GetComponent<Player1Movement>().GetPlayerScore();
-            scoreText+=playerScore;
+            int score = players[i].GetComponent<Player1Movement>().GetPlayerScore();
+            scoreText+=score;
             scoreText+="\n";
         }
 
