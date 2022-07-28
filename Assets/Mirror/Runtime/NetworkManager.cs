@@ -135,6 +135,13 @@ namespace Mirror
         GameObject pickUp1;
         GameObject pickUp2;
 
+        /*public GameObject[] players;
+
+        [SyncVar]
+        public int[] playerScores;*/
+
+        
+
         // virtual so that inheriting classes' OnValidate() can call base.OnValidate() too
         public virtual void OnValidate()
         {
@@ -1296,6 +1303,10 @@ namespace Mirror
                     pickUp1 = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "PickUp2"), position, Quaternion.identity);
                     NetworkServer.Spawn(pickUp1);
                 }
+
+                //players = GameObject.FindGameObjectsWithTag("Player");
+
+                //playerScores = new int[players.Length];
                 
             }
             
@@ -1402,5 +1413,12 @@ namespace Mirror
 
         /// <summary>This is called when a host is stopped.</summary>
         public virtual void OnStopHost() {}
+
+        /*void UpdateScore(GameObject player, int pointsAdded)
+        {
+            int playerIndex = Array.IndexOf(players, player);
+
+            playerScores[playerIndex] = playerScores[playerIndex] + pointsAdded;
+        }*/
     }
 }

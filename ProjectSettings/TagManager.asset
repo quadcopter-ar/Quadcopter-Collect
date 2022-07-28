@@ -6,6 +6,7 @@ TagManager:
   tags:
   - PickUp
   - PickUp2
+  - PlayerScore
   layers:
   - Default
   - TransparentFX

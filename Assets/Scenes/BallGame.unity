@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 146216784}
   - component: {fileID: 146216783}
   - component: {fileID: 146216782}
+  - component: {fileID: 146216787}
   - component: {fileID: 146216786}
   m_Layer: 5
   m_Name: Canvas
@@ -333,8 +334,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e229fddf7a318dc45b2f25306284bd5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1: {fileID: 0}
-  player2: {fileID: 345377611}
+  syncMode: 0
+  syncInterval: 0.1
+  player1Score: 0
+  player2Score: 0
+  player1ScoreText: {fileID: 479179105}
+--- !u!114 &146216787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146216781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3540877315
+  serverOnly: 0
+  visible: 0
+  m_AssetId: 
+  hasSpawned: 0
 --- !u!1 &345377611
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,7 +527,7 @@ GameObject:
   - component: {fileID: 479179105}
   m_Layer: 5
   m_Name: Player1Score
-  m_TagString: Untagged
+  m_TagString: PlayerScore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

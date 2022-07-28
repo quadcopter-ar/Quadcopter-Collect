@@ -6,6 +6,7 @@ namespace Mirror.Examples.Pong
     {
         public float speed = 30;
         public Rigidbody2D rigidbody2d;
+        //public ScoreKeeper sk;
 
         public override void OnStartServer()
         {

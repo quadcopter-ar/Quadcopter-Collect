@@ -82,10 +82,10 @@ public class Player2Movement : MonoBehaviour
     void SetCountText()
     {
         player2ScoreText.text = "Player 2's Score: " + player2Score.ToString();
-        if(CheckGameOver.GameIsOver())
+        if(ScoreKeeper.GameIsOver())
         {
             gameOverText.gameObject.SetActive(true);
-            CheckGameOver.SetGameOverText(gameOverText);
+            ScoreKeeper.SetGameOverText(gameOverText);
             
         }
     }
