@@ -1292,14 +1292,14 @@ namespace Mirror
             {
                 for(int i = 0; i < pickUp1Count; i++)
                 {
-                    var position = new Vector3(Random.Range(-15.0f, 15.0f), 0.5f, Random.Range(-15.0f, 15.0f));
+                    var position = new Vector3(Random.Range(-14.5f, 14.5f), Random.Range(0.5f, 14.5f), Random.Range(-14.5f, 14.5f));
                     pickUp1 = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "PickUp"), position, Quaternion.identity);
                     NetworkServer.Spawn(pickUp1);
                 }
 
                 for(int i = 0; i < pickUp2Count; i++)
                 {
-                    var position = new Vector3(Random.Range(-15.0f, 15.0f), 0.5f, Random.Range(-15.0f, 15.0f));
+                    var position = new Vector3(Random.Range(-14.5f, 14.5f), Random.Range(0.5f, 14.5f), Random.Range(-14.5f, 14.5f));
                     pickUp1 = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "PickUp2"), position, Quaternion.identity);
                     NetworkServer.Spawn(pickUp1);
                 }

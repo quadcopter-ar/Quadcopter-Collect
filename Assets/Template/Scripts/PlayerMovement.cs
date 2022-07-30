@@ -42,29 +42,43 @@ public class PlayerMovement : NetworkBehaviour
     void Update()
     {
         if(isLocalPlayer){
-            if(Input.GetKeyDown(KeyCode.W))
+            if(Input.GetKey(KeyCode.W))
             {
-                movementVector = new Vector3(0.0f, 0.0f, 100.0f);
-                rb.AddForce(movementVector);
+                movementVector = new Vector3(0.0f, 0.0f, 0.1f);
+                this.transform.position = this.transform.position + movementVector;
             }
 
-            if(Input.GetKeyDown(KeyCode.A))
+            if(Input.GetKey(KeyCode.A))
             {
-                movementVector = new Vector3(-100.0f, 0.0f, 0.0f);
-                rb.AddForce(movementVector);
+                movementVector = new Vector3(-0.1f, 0.0f, 0.0f);
+                this.transform.position = this.transform.position + movementVector;
             }
 
-            if(Input.GetKeyDown(KeyCode.S))
+            if(Input.GetKey(KeyCode.S))
             {
-                movementVector = new Vector3(0.0f, 0.0f, -100.0f);
-                rb.AddForce(movementVector);
+                movementVector = new Vector3(0.0f, 0.0f, -0.1f);
+                this.transform.position = this.transform.position + movementVector;
             }
 
-            if(Input.GetKeyDown(KeyCode.D))
+            if(Input.GetKey(KeyCode.D))
             {
-                movementVector = new Vector3(100.0f, 0.0f, 0.0f);
-                rb.AddForce(movementVector);
+                movementVector = new Vector3(0.1f, 0.0f, 0.0f);
+                this.transform.position = this.transform.position + movementVector;
             }
+
+            if(Input.GetKey(KeyCode.R))
+            {
+                movementVector = new Vector3(0.0f, 0.1f, 0.0f);
+                this.transform.position = this.transform.position + movementVector;
+            }
+
+            if(Input.GetKey(KeyCode.V))
+            {
+                movementVector = new Vector3(0.0f, -0.1f, 0.0f);
+                this.transform.position = this.transform.position + movementVector;
+            }
+
+            CheckBoundaries();
             AdjustCamera();
         }
     }
@@ -72,5 +86,10 @@ public class PlayerMovement : NetworkBehaviour
     void AdjustCamera()
     {
         camera.transform.position = this.transform.position + cameraOffset;
+    }
+
+    void CheckBoundaries()
+    {
+        this.transform.position = new Vector3(Mathf.Clamp(this.transform.position.x, -15.0f, 15.0f), Mathf.Clamp(this.transform.position.y, 0.5f, 15.0f), Mathf.Clamp(this.transform.position.z, -15.0f, 15.0f));
     }
 }
