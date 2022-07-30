@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Player1Movement : NetworkBehaviour
+public class PlayerScoring : NetworkBehaviour
 {
-    Vector3 movementVector;
-    private Rigidbody rb;
+    
     [SyncVar]
     private int playerScore;
 
@@ -18,8 +17,8 @@ public class Player1Movement : NetworkBehaviour
     void Start()
     {
         if(isLocalPlayer){
-            movementVector = new Vector3(0.0f, 0.0f, 0.0f);
-            rb = GetComponent<Rigidbody>();
+            //movementVector = new Vector3(0.0f, 0.0f, 0.0f);
+            //rb = GetComponent<Rigidbody>();
             playerScore = 0;
             SetScoreText();
         }
@@ -29,7 +28,7 @@ public class Player1Movement : NetworkBehaviour
     void Update()
     {
         if(isLocalPlayer){
-            if(Input.GetKeyDown(KeyCode.W))
+            /*if(Input.GetKeyDown(KeyCode.W))
             {
                 movementVector = new Vector3(0.0f, 0.0f, 100.0f);
                 rb.AddForce(movementVector);
@@ -51,7 +50,7 @@ public class Player1Movement : NetworkBehaviour
             {
                 movementVector = new Vector3(100.0f, 0.0f, 0.0f);
                 rb.AddForce(movementVector);
-            }
+            }*/
             SetScoreText();
         }
         
@@ -97,7 +96,7 @@ public class Player1Movement : NetworkBehaviour
             scoreText+=(i+1);
             scoreText+=": ";
 
-            int score = players[i].GetComponent<Player1Movement>().GetPlayerScore();
+            int score = players[i].GetComponent<PlayerScoring>().GetPlayerScore();
             scoreText+=score;
             scoreText+="\n";
         }
