@@ -7,7 +7,9 @@ public class PlayerMovement : NetworkBehaviour
 {
 
     Vector3 movementVector;
+    Vector3 currentDirection;
     //private Rigidbody rb;
+    public GameObject camera;
 
 
     // Start is called before the first frame update
@@ -15,6 +17,13 @@ public class PlayerMovement : NetworkBehaviour
     {
         movementVector = new Vector3(0.0f, 0.0f, 0.0f);
         //rb = GetComponent<Rigidbody>();
+
+        //this.GetComponent<Renderer>().material.color.a = 0.5f;
+
+        Color tempcolor = this.GetComponent<MeshRenderer>().material.color;
+        tempcolor.a = 0.1f;
+        GetComponent<MeshRenderer>().material.color = tempcolor;
+        camera = GameObject.Find("Main Camera");
     }
 
     // Update is called once per frame
@@ -24,36 +33,72 @@ public class PlayerMovement : NetworkBehaviour
             if(Input.GetKey(KeyCode.W))
             {
                 movementVector = new Vector3(0.0f, 0.0f, 0.1f);
+
+                var rotationX = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).x;
+                var rotationY = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).y;
+                var rotationZ = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).z;
+                movementVector = Quaternion.Euler(rotationX, rotationY, rotationZ) * movementVector;
+                
                 this.transform.position = this.transform.position + movementVector;
             }
 
             if(Input.GetKey(KeyCode.A))
             {
                 movementVector = new Vector3(-0.1f, 0.0f, 0.0f);
+
+                var rotationX = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).x;
+                var rotationY = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).y;
+                var rotationZ = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).z;
+                movementVector = Quaternion.Euler(rotationX, rotationY, rotationZ) * movementVector;
+
                 this.transform.position = this.transform.position + movementVector;
             }
 
             if(Input.GetKey(KeyCode.S))
             {
                 movementVector = new Vector3(0.0f, 0.0f, -0.1f);
+                
+                var rotationX = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).x;
+                var rotationY = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).y;
+                var rotationZ = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).z;
+                movementVector = Quaternion.Euler(rotationX, rotationY, rotationZ) * movementVector;
+                
                 this.transform.position = this.transform.position + movementVector;
             }
 
             if(Input.GetKey(KeyCode.D))
             {
                 movementVector = new Vector3(0.1f, 0.0f, 0.0f);
+                
+                var rotationX = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).x;
+                var rotationY = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).y;
+                var rotationZ = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).z;
+                movementVector = Quaternion.Euler(rotationX, rotationY, rotationZ) * movementVector;
+                
                 this.transform.position = this.transform.position + movementVector;
             }
 
-            if(Input.GetKey(KeyCode.R))
+            if(Input.GetKey(KeyCode.E))
             {
                 movementVector = new Vector3(0.0f, 0.1f, 0.0f);
+                
+                var rotationX = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).x;
+                var rotationY = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).y;
+                var rotationZ = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).z;
+                movementVector = Quaternion.Euler(rotationX, rotationY, rotationZ) * movementVector;
+                
                 this.transform.position = this.transform.position + movementVector;
             }
 
-            if(Input.GetKey(KeyCode.V))
+            if(Input.GetKey(KeyCode.C))
             {
                 movementVector = new Vector3(0.0f, -0.1f, 0.0f);
+                
+                var rotationX = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).x;
+                var rotationY = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).y;
+                var rotationZ = UnityEditor.TransformUtils.GetInspectorRotation(camera.transform).z;
+                movementVector = Quaternion.Euler(rotationX, rotationY, rotationZ) * movementVector;
+                
                 this.transform.position = this.transform.position + movementVector;
             }
 

@@ -1306,7 +1306,15 @@ namespace Mirror
 
                 //players = GameObject.FindGameObjectsWithTag("Player");
 
+/*
                 //playerScores = new int[players.Length];
+                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                foreach(GameObject p in players)
+                {
+                    Color tempcolor = p.GetComponent<MeshRenderer>().material.color;
+                    tempcolor.a = 0.1f;
+                    p.GetComponent<MeshRenderer>().material.color = tempcolor;
+                }*/
                 
             }
             
