@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6015050921126660321}
   - component: {fileID: -158771995964699545}
   - component: {fileID: -908767447221653233}
+  - component: {fileID: -6724322657076853998}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -59,6 +60,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -229,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  camera: {fileID: 0}
 --- !u!114 &-908767447221653233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,3 +247,17 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0.1
   camera: {fileID: 0}
+--- !u!114 &-6724322657076853998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718417290604518437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a07a5295e8c8ef4086b8a0f43e7dfb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  debugMode: 0
