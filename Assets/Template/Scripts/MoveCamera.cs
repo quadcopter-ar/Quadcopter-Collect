@@ -14,7 +14,7 @@ public class MoveCamera : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = GameObject.Find("Main Camera");
+        camera = GameObject.Find("XRRig");
         cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
         camera.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
         movementVector = new Vector3(0.0f, 0.0f, 0.0f);

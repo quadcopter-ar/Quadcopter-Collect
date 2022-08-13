@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using UnityEngine.InputSystem;
+using Mirror;
 
-public class BasicMovement : MonoBehaviour
+public class BasicMovement : NetworkBehaviour
 {
     float deadZoneAmount = 0.5f;
     public float speed = 10;
@@ -22,7 +23,17 @@ public class BasicMovement : MonoBehaviour
     private Gamepad gamepad;
 
 
+    public GameObject cameraXRRig;
+
+
     void Start() {
+
+
+        cameraXRRig = GameObject.Find("XRRig");
+
+
+
+
         //Lets get all the devices we can find.
         if(!debugMode){
           GetDevices();
@@ -36,6 +47,10 @@ public class BasicMovement : MonoBehaviour
     }
 
     void Update() {
+        if(!isLocalPlayer)
+        {
+          return;
+        }
         if(!debugMode){
             if (leftController == null) {
                 GetControllerDevices(leftControllerNode, ref leftController, ref leftInputDevices);
@@ -49,7 +64,8 @@ public class BasicMovement : MonoBehaviour
         }else{
           Vector2 leftStick = gamepad.leftStick.ReadValue();
           Vector2 rightStick = gamepad.rightStick.ReadValue();
-
+          Debug.Log(leftStick);
+          Debug.Log(rightStick);
           if(leftStick != Vector2.zero){
             if(leftStick.x < -deadZoneAmount){
               MoveRight(leftStick.x);
@@ -90,10 +106,10 @@ public class BasicMovement : MonoBehaviour
         Vector2 leftTouchCoords;
         Vector2 rightTouchCoords;
         bool triggerVal;
-
+        //Debug.Log("Bang");
         if (leftController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out leftTouchCoords) && leftTouchCoords != Vector2.zero)
         {
-
+            Debug.Log("RightController");
             if(leftTouchCoords.x < -deadZoneAmount){
               MoveLeft(leftTouchCoords.x);
             }else if(leftTouchCoords.x > deadZoneAmount){
@@ -109,6 +125,7 @@ public class BasicMovement : MonoBehaviour
 
         if (rightController.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primary2DAxis, out rightTouchCoords) && rightTouchCoords != Vector2.zero)
         {
+            Debug.Log("LeftController");
             if(rightTouchCoords.x < -deadZoneAmount){
               RotateLeft(rightTouchCoords.x);
             }else if(rightTouchCoords.x > deadZoneAmount){
@@ -149,10 +166,16 @@ public class BasicMovement : MonoBehaviour
 
     void RotateLeft(float input){
       RotateObject(Vector3.up * input * Time.deltaTime * speed*10);
+      //cameraXRRig.transform.Rotate(Vector3.up * input * Time.deltaTime * speed*5);
     }
 
     void RotateRight(float input){
       transform.Rotate(Vector3.down * input * Time.deltaTime * -speed * 10);
+      //cameraXRRig.transform.Rotate(Vector3.down * input * Time.deltaTime * -speed * 5);
+      cameraXRRig.transform.rotation = this.transform.rotation;
+      //var rotationX = UnityEditor.TransformUtils.GetInspectorRotation(this.transform).x;
+      //var rotationY = UnityEditor.TransformUtils.GetInspectorRotation(this.transform).y;
+      //var rotationZ = UnityEditor.TransformUtils.GetInspectorRotation(this.transform).z;
     }
     void MoveObject(Vector3 tranlation){
       transform.Translate(tranlation);
@@ -160,6 +183,8 @@ public class BasicMovement : MonoBehaviour
 
     void RotateObject(Vector3 rotation){
       transform.Rotate(rotation);
+      cameraXRRig.transform.rotation = this.transform.rotation;
+      //cameraXRRig.transform.Rotate(rotation);
     }
 
     void GetDevices() {
