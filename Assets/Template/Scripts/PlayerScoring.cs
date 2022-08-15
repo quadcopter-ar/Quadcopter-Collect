@@ -107,12 +107,4 @@ public class PlayerScoring : NetworkBehaviour
         
     }
 
-    void ResetCanvas()
-    {
-        GameObject canvas = GameObject.Find("Canvas");
-        //canvas.rectTransform.localPosition = new Vector3(0,0,0);
-        //canvas.transform = 
-    }
-
-    
 }

@@ -13,9 +13,6 @@ public class ResetCanvas : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if(Input.GetKeyDown(KeyCode.Q)){
-            ResetCanvasPos();
-        }*/
         ResetCanvasPos();
     }
 
@@ -26,5 +23,6 @@ public class ResetCanvas : MonoBehaviour
         Debug.Log("Canvas Pos: " + canvasePos.localPosition);
         canvasePos.localPosition = new Vector3(-15,10,15);
         canvasePos.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        canvasePos.sizeDelta = new Vector2(20,10);
     }
 }
