@@ -24,13 +24,14 @@ public class BasicMovement : NetworkBehaviour
 
 
     public GameObject cameraXRRig;
+    Vector3 cameraOffset;
 
 
     void Start() {
 
 
         cameraXRRig = GameObject.Find("XRRig");
-
+        cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
 
 
 
@@ -61,6 +62,7 @@ public class BasicMovement : NetworkBehaviour
             }
 
             CheckForChanges();
+            AdjustCamera();
         }else{
           Vector2 leftStick = gamepad.leftStick.ReadValue();
           Vector2 rightStick = gamepad.rightStick.ReadValue();
@@ -185,6 +187,11 @@ public class BasicMovement : NetworkBehaviour
       transform.Rotate(rotation);
       cameraXRRig.transform.rotation = this.transform.rotation;
       //cameraXRRig.transform.Rotate(rotation);
+    }
+
+    void AdjustCamera()
+    {
+        cameraXRRig.transform.position = this.transform.position + cameraOffset;
     }
 
     void GetDevices() {
