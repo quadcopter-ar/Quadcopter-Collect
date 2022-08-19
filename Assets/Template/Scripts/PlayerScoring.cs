@@ -79,18 +79,18 @@ public class PlayerScoring : NetworkBehaviour
     {
         if(other.gameObject.CompareTag("PickUp"))
         {
-            source.Play();//play sweeping sound
             other.gameObject.SetActive(false);//disable the item
             SetPlayerScore(playerScore + 2);//award points to player
             SetScoreText();//update scoreboard
+            source.Play();//play sweeping sound
         }
 
         if(other.gameObject.CompareTag("PickUp2"))
         {
-            source.Play();//play sweeping sound
             other.gameObject.SetActive(false);//disable the item
             SetPlayerScore(playerScore + 3);//award points to player
             SetScoreText();//update scoreboard
+            source.Play();//play sweeping sound
         }
         
     }
