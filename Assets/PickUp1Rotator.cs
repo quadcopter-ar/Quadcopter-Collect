@@ -10,7 +10,7 @@ public class PickUp1Rotator : MonoBehaviour
 {
     
     GameObject[] players;
-    float radius = 1.0f;
+    float radius = 15.0f;
 
     // Update is called once per frame
     void Update()
