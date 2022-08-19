@@ -1288,6 +1288,7 @@ namespace Mirror
             player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
             NetworkServer.AddPlayerForConnection(conn, player);
 
+            //When both players have joined the game, the collectible items are spawned from the server.
             if (numPlayers == 2)
             {
                 for(int i = 0; i < pickUp1Count; i++)
@@ -1303,18 +1304,6 @@ namespace Mirror
                     pickUp1 = Instantiate(spawnPrefabs.Find(prefab => prefab.name == "PickUp2"), position, Quaternion.identity);
                     NetworkServer.Spawn(pickUp1);
                 }
-
-                //players = GameObject.FindGameObjectsWithTag("Player");
-
-/*
-                //playerScores = new int[players.Length];
-                GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-                foreach(GameObject p in players)
-                {
-                    Color tempcolor = p.GetComponent<MeshRenderer>().material.color;
-                    tempcolor.a = 0.1f;
-                    p.GetComponent<MeshRenderer>().material.color = tempcolor;
-                }*/
                 
             }
             
