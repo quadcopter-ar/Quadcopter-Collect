@@ -5,6 +5,13 @@ using UnityEngine.XR;
 using UnityEngine.InputSystem;
 using Mirror;
 
+/*
+This script is attached to the player prefab. This script is responsible for receiving input from Oculus devices in order to move and/or rotate the player. 
+This script was provided in the template. I added some code to this script to ensure the camera is consistent with the player with position and rotation. 
+
+*/
+
+
 public class BasicMovement : NetworkBehaviour
 {
     float deadZoneAmount = 0.5f;
@@ -22,8 +29,8 @@ public class BasicMovement : NetworkBehaviour
 
     private Gamepad gamepad;
 
-
-    public GameObject cameraXRRig;
+    
+    public GameObject cameraXRRig; //this is the camera for Oculus devices
     Vector3 cameraOffset;
 
 
@@ -31,7 +38,7 @@ public class BasicMovement : NetworkBehaviour
 
 
         cameraXRRig = GameObject.Find("XRRig");
-        cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
+        cameraOffset = new Vector3(0.0f, 0.0f, 0.0f); //This can be nodified if it is desired for the camera to be a certain distance/direction away from the player
 
 
 
@@ -168,16 +175,12 @@ public class BasicMovement : NetworkBehaviour
 
     void RotateLeft(float input){
       RotateObject(Vector3.up * input * Time.deltaTime * speed*10);
-      //cameraXRRig.transform.Rotate(Vector3.up * input * Time.deltaTime * speed*5);
     }
 
     void RotateRight(float input){
       transform.Rotate(Vector3.down * input * Time.deltaTime * -speed * 10);
-      //cameraXRRig.transform.Rotate(Vector3.down * input * Time.deltaTime * -speed * 5);
-      cameraXRRig.transform.rotation = this.transform.rotation;
-      //var rotationX = UnityEditor.TransformUtils.GetInspectorRotation(this.transform).x;
-      //var rotationY = UnityEditor.TransformUtils.GetInspectorRotation(this.transform).y;
-      //var rotationZ = UnityEditor.TransformUtils.GetInspectorRotation(this.transform).z;
+      cameraXRRig.transform.rotation = this.transform.rotation; //sets camera rotation to be same as that of the player.
+      
     }
     void MoveObject(Vector3 tranlation){
       transform.Translate(tranlation);
@@ -185,10 +188,10 @@ public class BasicMovement : NetworkBehaviour
 
     void RotateObject(Vector3 rotation){
       transform.Rotate(rotation);
-      cameraXRRig.transform.rotation = this.transform.rotation;
-      //cameraXRRig.transform.Rotate(rotation);
+      cameraXRRig.transform.rotation = this.transform.rotation; //sets camera rotation to be same as that of the player.
     }
 
+    //sets camera position to be same as that of the player.
     void AdjustCamera()
     {
         cameraXRRig.transform.position = this.transform.position + cameraOffset;

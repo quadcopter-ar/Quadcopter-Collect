@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using Mirror;
 
+/*
+This script ensures that the camera's position and rotation is consistent with that of the player. This script is attached to the player prefab.
+*/
+
 public class MoveCamera : NetworkBehaviour
 {
 
@@ -14,12 +18,10 @@ public class MoveCamera : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        camera = GameObject.Find("XRRig");
-        cameraOffset = new Vector3(0.0f, 0.0f, 0.0f);
-        camera.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
-        movementVector = new Vector3(0.0f, 0.0f, 0.0f);
+        camera = GameObject.Find("XRRig"); //XRRig is the camera for Oculus devices.
+        cameraOffset = new Vector3(0.0f, 0.0f, 0.0f); //This can be nodified if it is desired for the camera to be a certain distance/direction away from the player
+        camera.transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f); //The camera rotation starts off not rotated in any direction, consistent with the player
         AdjustCamera();
-        SetTransparency();
     }
 
     // Update is called once per frame
@@ -27,68 +29,16 @@ public class MoveCamera : NetworkBehaviour
     {
         if(isLocalPlayer)
         {
-
             AdjustCamera();
-
-            if(Input.GetKey(KeyCode.I))
-            {
-                movementVector = new Vector3(-0.5f, 0.0f, 0.0f);
-                camera.transform.Rotate(movementVector);
-                //this.transform.position = this.transform.position + movementVector;
-            }
-
-            if(Input.GetKey(KeyCode.J))
-            {
-                movementVector = new Vector3(0.0f, -0.5f, 0.0f);
-                camera.transform.Rotate(movementVector);
-                //this.transform.position = this.transform.position + movementVector;
-            }
-
-            if(Input.GetKey(KeyCode.K))
-            {
-                movementVector = new Vector3(0.5f, 0.0f, 0.0f);
-                camera.transform.Rotate(movementVector);
-                //this.transform.position = this.transform.position + movementVector;
-            }
-
-            if(Input.GetKey(KeyCode.L))
-            {
-                movementVector = new Vector3(0.0f, 0.5f, 0.0f);
-                camera.transform.Rotate(movementVector);
-                //this.transform.position = this.transform.position + movementVector;
-            }
-
-            if(Input.GetKey(KeyCode.U))
-            {
-                movementVector = new Vector3(0.0f, 0.0f, 0.5f);
-                camera.transform.Rotate(movementVector);
-                //this.transform.position = this.transform.position + movementVector;
-            }
-
-            if(Input.GetKey(KeyCode.O))
-            {
-                movementVector = new Vector3(0.0f, 0.0f, -0.5f);
-                camera.transform.Rotate(movementVector);
-                //this.transform.position = this.transform.position + movementVector;
-            }
         }
         
     }
 
+    //This function makes the camera's position and rotation consistent with those of the player. 
     void AdjustCamera()
     {
         camera.transform.position = this.transform.position + cameraOffset;
+        camera.transform.rotation = this.transform.rotation;
     }
 
-    [Command]
-    public void SetTransparency()
-    {
-        /*GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach(GameObject player in players)
-        {
-            Color tempcolor = player.GetComponent<MeshRenderer>().material.color;
-            tempcolor.a = 0.1f;
-            player.GetComponent<MeshRenderer>().material.color = tempcolor;
-        }*/
-    }
 }
