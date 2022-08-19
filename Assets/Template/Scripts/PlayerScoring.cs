@@ -9,7 +9,6 @@ This script is attached to the player. It serves multiple purposes:
 1. Keeping track of each player's score in the server (using SyncVar and Command)
 2. detecting collisions with items
 3. ensuring that the scoreboard displays the most updated score
-4. 
 
 */
 
@@ -40,9 +39,6 @@ public class PlayerScoring : NetworkBehaviour
             }
             Debug.Log("Source: " + source);
 
-
-            //movementVector = new Vector3(0.0f, 0.0f, 0.0f);
-            //rb = GetComponent<Rigidbody>();
 
             //player's score starts off at 0
             playerScore = 0;
@@ -83,7 +79,6 @@ public class PlayerScoring : NetworkBehaviour
     {
         if(other.gameObject.CompareTag("PickUp"))
         {
-            //other.gameObject.GetComponent<Renderer>().material.color = new Color(255,0,0);
             source.Play();//play sweeping sound
             other.gameObject.SetActive(false);//disable the item
             SetPlayerScore(playerScore + 2);//award points to player
@@ -92,7 +87,6 @@ public class PlayerScoring : NetworkBehaviour
 
         if(other.gameObject.CompareTag("PickUp2"))
         {
-            //other.gameObject.GetComponent<Renderer>().material.color = new Color(255,0,0);
             source.Play();//play sweeping sound
             other.gameObject.SetActive(false);//disable the item
             SetPlayerScore(playerScore + 3);//award points to player
