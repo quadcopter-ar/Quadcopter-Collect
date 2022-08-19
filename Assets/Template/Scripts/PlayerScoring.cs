@@ -13,16 +13,30 @@ public class PlayerScoring : NetworkBehaviour
     public TextMeshProUGUI player1ScoreText;
     public TextMeshProUGUI gameOverText;
     GameObject[] players;
+
+    public AudioSource source;
+    [SerializeField] AudioClip audioClip;
     // Start is called before the first frame update
     void Start()
     {
         if(isLocalPlayer){
+            source = GetComponent<AudioSource>();
+            source.clip = audioClip;
+            if(source == null)
+            {
+                Debug.Log("NULL Audio ");
+            }
+            Debug.Log("Source: " + source);
+
+
             //movementVector = new Vector3(0.0f, 0.0f, 0.0f);
             //rb = GetComponent<Rigidbody>();
             playerScore = 0;
             SetScoreText();
         }
     }
+    
+
 
     // Update is called once per frame
     void Update()
@@ -53,6 +67,12 @@ public class PlayerScoring : NetworkBehaviour
             }*/
             SetScoreText();
         }
+        /*if(Input.GetKeyDown(KeyCode.Q))
+        {
+            //source.Play();
+            source.PlayOneShot(audioClip, 1.0f);
+            Debug.Log("PlaySound");
+        }*/
         
     }
 
@@ -71,6 +91,10 @@ public class PlayerScoring : NetworkBehaviour
     {
         if(other.gameObject.CompareTag("PickUp"))
         {
+            other.gameObject.GetComponent<Renderer>().material.color = new Color(255,0,0);
+            source.Play();
+            //source.PlayOneShot(audioClip, 1.0f);
+            //yield return new WaitForSeconds(Time.deltaTime);
             other.gameObject.SetActive(false);
             SetPlayerScore(playerScore + 2);
             SetScoreText(); 
@@ -78,6 +102,10 @@ public class PlayerScoring : NetworkBehaviour
 
         if(other.gameObject.CompareTag("PickUp2"))
         {
+            other.gameObject.GetComponent<Renderer>().material.color = new Color(255,0,0);
+            source.Play();
+            //source.PlayOneShot(audioClip, 1.0f);
+            //yield return new WaitForSeconds(Time.deltaTime);
             other.gameObject.SetActive(false);
             SetPlayerScore(playerScore + 3);
             SetScoreText();

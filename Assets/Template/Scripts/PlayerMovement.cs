@@ -21,7 +21,7 @@ public class PlayerMovement : NetworkBehaviour
         //this.GetComponent<Renderer>().material.color.a = 0.5f;
 
         Color tempcolor = this.GetComponent<MeshRenderer>().material.color;
-        tempcolor.a = 0.1f;
+        tempcolor.a = 1.0f;
         GetComponent<MeshRenderer>().material.color = tempcolor;
         camera = GameObject.Find("Main Camera");
     }
